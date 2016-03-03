@@ -1,0 +1,99 @@
+{"sync":[
+{
+	"min":0,
+	"max":11,
+	"ATS":0,
+	"MaxATP":0,
+	"StrainModifier":0,
+	"Conditions":["Defeated"]
+},
+{
+	"min":12,
+	"max":22,
+	"ATS":0,
+	"MaxATP":0,
+	"StrainModifier":4,
+	"Conditions":["Staggered","NoAT"]
+},
+{
+	"min":23,
+	"max":33,
+	"ATS":1,
+	"MaxATP":2,
+	"StrainModifier":2,
+	"Conditions":[]
+},
+{
+	"min":34,
+	"max":44,
+	"ATS":1,
+	"MaxATP":3,
+	"StrainModifier":1,
+	"Conditions":[]
+},
+{
+	"min":45,
+	"max":55,
+	"ATS":2,
+	"MaxATP":4,
+	"StrainModifier":0,
+	"Conditions":[]
+},
+{
+	"min":56,
+	"max":66,
+	"ATS":2,
+	"MaxATP":5,
+	"StrainModifier":0,
+	"Conditions":[]
+},
+{
+	"min":67,
+	"max":77,
+	"ATS":3,
+	"MaxATP":6,
+	"StrainModifier":-1,
+	"Conditions":[]
+},
+{
+	"min":78,
+	"max":88,
+	"ATS":3,
+	"MaxATP":7,
+	"StrainModifier":-2,
+	"Conditions":[]
+},
+{
+	"min":89,
+	"max":99,
+	"ATS":3,
+	"MaxATP":8,
+	"StrainModifier":-3,
+	"Conditions":["Complex(1)"]
+},
+{
+	"min":100,
+	"max":120,
+	"ATS":4,
+	"MaxATP":8,
+	"StrainModifier":-4,
+	"Conditions":["Complex(1)","Sympathetic","Oversynch(1d6)"]
+},
+{
+	"min":121,
+	"max":150,
+	"ATS":6,
+	"MaxATP":10,
+	"StrainModifier":-5,
+	"Conditions":["Complex(1)","Sympathetic","Oversynch(2d6)","Lucky(1)"]
+},
+{
+	"min":151,
+	"max":200,
+	"ATS":10,
+	"MaxATP":15,
+	"StrainModifier":-6,
+	"Conditions":["Complex(0)","Sympathetic","Oversynch(3d6)","Lucky(2)"]
+}
+]
+}
