@@ -1,5 +1,6 @@
 import json
 import random
+import re
 
 with open('config/weaponProperties.json') as data_file:
     GlobalWeaponPropertyList = json.loads(data_file.read())
@@ -56,7 +57,7 @@ class Weapon:
             damStr = self.damage.split('+')
             damage = 0 + int(damStr[1])
         except IndexError:
-            damStr = self.damage
+            damStr = [self.damage]
         diceToRoll = int(damStr[0].split('d')[0])
         while diceToRoll > 0:
             damage = damage + random.randint(1,int(damStr[0].split('d')[1]))
