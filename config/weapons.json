@@ -343,7 +343,7 @@
 	"attackMode": "Single",
 	"ammo": 0,
 	"reload": 0,
-	"damage": "1d1-1",
+	"damage": "1d1+-1",
 	"addStrFlag": true,
 	"damageType": "K",
 	"properties": ["Defensive(20)","SpecialESV"],

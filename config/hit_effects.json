@@ -31,29 +31,83 @@
 			},
 		"Arms":
 			{
+			"1":["NonStackTestPenalty(-10|EF):EoNT.","NonStackTestPenalty(-10|EM):EoNT.","SD+5","Strain+1"],
+			"2":["NonStackTestPenalty(-10|EF):EoNT.","NonStackTestPenalty(-10|EM):EoNT.","SD+5","Strain+1"],
+			"3":["Whatever is in this Wing Dock is destroyed or lost for the remainder of the battle. If that wing was unused, treat the Hit Effect roll as if it were 1 instead."],
+			"4":["Drop anything held in arm.","Useless:3","Strain+1"],
+			"5":["Drop anything held in arm.","Useless:3","Strain+1"],
+			"6":["Smolder:1d6","SD+5","Strain+2"],
+			"7":["Smolder:1d6","SD+5","Strain+2"],
+			"8":["Broken","SD+10","Strain+2"],
+			"9":["Broken","Stress+1d6","SD+15","Strain+3"]
 			},
 		"Legs":
 			{
-			}
+			"1":["Slowed:1d6.","SD+-5","Strain+1"],
+			"2":["Slowed:1d6.","SD+-5","Strain+1"],
+			"3":["Slowed:1d6.","SD+-5","Strain+1"],
+			"4":["Immobilized:1d6.","Strain+1"],
+			"5":["Immobilized:1d6.","Strain+1"],
+			"6":["Smolder:1d6","SD+5","Strain+2"],
+			"7":["Smolder:1d6","SD+5","Strain+2"],
+			"8":["Hobbled:6","SD+5","Strain+2","Stress+2"],
+			"9":["Hobbled:6","SD+5","Strain+2","Stress+2"],
+			"10":["Hobbled","SD+10","Strain+3","Stress+1d6"]
+			}	
 		},
 	"K":
 		{
 		"Head":
 			{
-			"1":["Placeholder"]
+			"1":["Test(SR|Winded:EoNT|)","SD+-5","Strain+1"],
+			"2":["Test(SR|Winded:EoNT|)","SD+-5","Strain+1"],
+			"3":["Dazed:3","SD+-5","Strain+1"],
+			"4":["Dazed:3","SD+-5","Strain+1"],
+			"5":["Surprised:1d6","SD+-10","Strain+1"],
+			"6":["Stunned:3","SD+-5","Strain+2"],
+			"7":["Stunned:3","SD+-5","Strain+2"],
+			"8":["Fatigue+1","Winded:2*Fatigue"],
+			"9":["Defeated","Fatigue+2","Stress+2d10"]
 			},
 		"Body":
 			{
-			"1":["Placeholder"]
+			"1":["Destroy Umbilical."],
+			"2":["NoReaction:SoNT","Test(Balance-10|Prone|)","Strain+1"],
+			"3":["NoReaction:SoNT","Test(Balance-10|Prone|)","Strain+1"],
+			"4":["ChangeStat(-1|S)","SD+5","Strain+1"],
+			"5":["ChangeStat(-1|T)","SD+10","Strain+2"],
+			"6":["ChangeStat(-1|T)","SD+10","Strain+2"],
+			"7":["ChangeStat(-1|T)","SD+10","Strain+2"],
+			"8":["Test(Physique|Injury+1|Fatigue+1)","Winded:2","SD+-5"],
+			"9":["Test(Physique|Injury+1|Fatigue+1)","Winded:2","SD+-5"],
+			"10":["Defeated","Stress+2d6","Test(Physique-10|Injury+1|)"],
+			"11":["Defeated","Roll 1d6. One a 1 or 2, the pilot is fine. On a 5 or 6, the pilot dies. On any other result, the pilot gains 1 Injury."]
 			},
 		"Arms":
 			{
-			"1":["Placeholder"]
+			"1":["Anything held in that hand is tossed to 1 Sector further away from the attacker."],
+			"2":["Whatever is in this Wing Dock is destroyed or lost for the remainder of the battle. If that wing was unused, treat the Hit Effect roll as if it were 1 instead."],
+			"3":["ChangeStat(-1|S)","SD+5","Strain+1"],
+			"4":["ChangeStat(-1|S)","SD+5","Strain+1"],
+			"5":["Drop anything held in arm.","Useless:5","SD+5","Strain+1"],
+			"6":["Drop anything held in arm.","Useless:5","SD+5","Strain+1"],
+			"7":["Broken:2d6","Stunned:2","SD+10","Strain+2"],
+			"8":["Broken:2d6","Stunned:2","SD+10","Strain+2"],
+			"9":["Broken","Stress+1d6","SD+10","Strain+3"]
 			},
 		"Legs":
 			{
-			"1":["Placeholder"]
-			}
+			"1":["Slowed:1d6","SD+5","Strain+1"],
+			"2":["Slowed:1d6","SD+5","Strain+1"],
+			"3":["Slowed:1d6","SD+5","Strain+1"],
+			"4":["Prone","SD+-5","Strain+1"],
+			"5":["Prone","SD+-5","Strain+1"],
+			"6":["Immobilized:1d6 Intervals","Slowed:4 after that","SD+5","Strain+1"],
+			"7":["Immobilized:1d6 Intervals","Slowed:4 after that","SD+5","Strain+1"],
+			"8":["Hobbled:10","SD+5","Strain+2","Fatigue+1"],
+			"9":["Hobbled:10","SD+5","Strain+2","Fatigue+1"],
+			"10":["Hobbled","Stress+1d6","SD:+10","Strain+3"]
+			}	
 		}
 	},
 "Angel":

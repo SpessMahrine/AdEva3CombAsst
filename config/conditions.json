@@ -26,5 +26,7 @@
 "Lucky":["Gain XXX luck.",""],
 "NoAT":["Has no AT Field",""],
 "StackTestPenalty":["Take a XXX penalty to YYY tests. Stacks",""],
-"NonStackTestPenalty":["Take a XXX penalty to YYY tests.",""]
+"NonStackTestPenalty":["Take a XXX penalty to YYY tests.",""],
+"Useless":["The arm cannot be used.",""],
+"NoReaction":["Cannot use reactions"]
 }
