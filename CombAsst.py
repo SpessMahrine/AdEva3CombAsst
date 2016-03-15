@@ -1,3 +1,4 @@
+import sys
 import re
 import json
 import random
@@ -105,13 +106,15 @@ def parseInput(request, player, originOfAction):
             return ['Combat is not running.',originOfAction]
     elif cmd[0] == 'start' and cmd[1] == 'combat':
         if combatMode:
-            return ['A combat is already running. ' + combatOwner +
-                    ' is the owner of combat and must end it before a new combat can start.',
+            ownerStr = ''
+            for o in combatOwner: ownerStr = ownerStr + o + ' or '
+            return ['A combat is already running. ' + ownerStr.rstrip(' or ') +
+                    ' must end it before a new combat can start.',
                     originOfAction]
         else:
             combatMode = True
             combatOutput = originOfAction
-            combatOwner = player
+            combatOwner = [player]
             return ['Starting combat module. All combat output will be written to this channel. ' +
                     player +
                     ' is the GM of combat. Combat mode is set to automatic because manual mode ' +
@@ -182,7 +185,13 @@ with open('config/weapons.json') as data_file:
 with open('config/hit_effects.json') as data_file:
     GlobalHitEffects = json.loads(data_file.read())
 
+errorSuppress = True #doesn't crash the module if something goes wrong.
+#set to False to lose data and get tracebacks
+
 print(parseInput('start combat', 'TESTPLAYER', 'TESTORIGIN')[0])
 
 while combatMode:
-    print(parseInput(input('INPUT COMMAND: '),'Player','Origin')[0])
+    if errorSuppress:
+        try: print(parseInput(input('INPUT COMMAND: '),'Player','Origin')[0])
+        except: print(sys.exc_info())
+    else: print(parseInput(input('INPUT COMMAND: '),'Player','Origin')[0])
