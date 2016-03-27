@@ -4,7 +4,9 @@ with open('config/sr.json') as data_file:
     GlobalSyncDefinition = json.loads(data_file.read())
     
 class Actor:
-    def __init__(self, name, owner, actorType, strength, toughness, armor, reflexes, em, ef, physique, intelligence, empathy, sr, ats, atp, hitProfile, cmTicker):
+    def __init__(self, name, owner, actorType, strength, toughness, armor,
+                 reflexes, em, ef, physique, intelligence, empathy, sr,
+                 ats, atp, hitProfile, cmTicker):
         global GlobalCriticalMomentumTicker
         self.name = name
         self.owner = owner
