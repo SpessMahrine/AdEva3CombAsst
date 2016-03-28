@@ -15,30 +15,26 @@ Known issues:
 
   (1) Error handling. The basic terminal prompt is wrapped in a try/except statement so that data persists despite typos, but the handling is bad and there are other unhandled errors elsewhere.
   
-  (2) It doesn’t actually do much and many things, including Hit Effects and Weapons are incomplete. Workaround is to wait for me to finish this or finish it yourself. Probably let me know if you’re going to do that so we can pool our efforts.
-  
-  (3) Typos. No workaround, a lot of the text will end up changing anyway.
+  (2) Project is in an incomplete state. Nothing to do but wait or help.
   
 Planned features, kind of in order:
 
-  (1)	Prompt framework that allows guided creation of arbitrary actors and weapons.
+  (1) Encapsulate everything in single Combat framework so that the same bot can run multiple combats.
+
+  (2)	Encapsulate all players into Director framework that also handles GM permissions.
   
-  (2)	GMs having permissions to modify all actors in any way.
+  (3) Sectors and Engagements framework build into Combat.
   
-  (3)	Manual mode that prompts you for dice results instead of rolling dice for you.
+  (4) Action framework so that Actors can actually do things.
   
-  (4)	Condition framework.
+  (5)	Condition framework so that Actions can have results.
   
-  (5)	Action framework.
+  (6)	Trigger framework. Tied heavily to Conditions and required to make Conditions work right.
   
-  (6)	Trigger framework.
+  (7)	Initiative framework. So that Rounds and Intervals advance correctly.
   
-  (7)	Initiative framework.
+  (8) Save/load functions that offload everything to file(s).
   
-  (8) Combat map/engagement framework.
+  (9) Character creation function that creates a loadable character.
   
-  (9) Save/load functions that offload everything to file(s).
-  
-  (10) Character creation function that creates a loadable character.
-  
-  (11) Some sort of GUI option, which will likely be a fork of this project into a standalone application in case you want to play with people IRL instead of online.
+  (10) Some sort of GUI option, which will likely be a fork of this project into a standalone application in case you want to play with people IRL instead of online.
