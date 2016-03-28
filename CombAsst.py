@@ -5,6 +5,7 @@ import random
 import Actor
 import HitLocation
 import Weapon
+import Prompt
 
 ################ COMBAT STUFF
 
@@ -18,6 +19,52 @@ def importWeapon(name):
                           w['properties'],w['cost'])
     return Weapon.Weapon('!ERROR! ' + name,'N/A','N/A','N/A','N/A','N/A','N/A','N/A','N/A',
                   'N/A',['N/A'],'N/A')
+
+# Returns True of obj.owner is owner, or if owner is a GM. False otherwise
+# obj must have an owner value!
+def canCommand(obj, owner):
+    global combatOwner
+    if owner in combatOwner or obj.owner == owner: return True
+    else: return False
+
+# Adds a prompt to the global prompt list that builds an arbitrary Evangelion
+def buildArbitraryEva(owner):
+    global currentPrompt
+    currentPrompt = Prompt.Prompt("addActor(Actor.Actor(qqq, '"+owner+"','Evangelion Unit',qqq,qqq,\
+                                  qqq,qqq,qqq,qqq,qqq,qqq,qqq,qqq,0,0,\
+                                  [HitLocation.HitLocation(1,10,'head'),\
+                                  HitLocation.HitLocation(11,20,'r arm'),\
+                                  HitLocation.HitLocation(21,30,'l arm'),\
+                                  HitLocation.HitLocation(31,70,'body'),\
+                                  HitLocation.HitLocation(71,100,'legs')], 15))",
+                                  ['Name', 'Strength', 'Toughness', 'Armor',
+                                   'Reflexes', 'Eva Martial', 'Eva Firearms',
+                                   'Physique', 'Intelligence', 'Empathy',
+                                   'Synch Ratio'],
+                                  ['s','i','i','i','i','i','i','i','i','i','i'],
+                                  ['',10,10,5,50,80,80,40,40,40,50],
+                                  False,owner)
+    return 'Entering eva construction mode.'
+
+def promptRespond(owner, response):
+    global currentPrompt
+    if currentPrompt != 0:
+        if canCommand(currentPrompt, owner):
+            if not currentPrompt.isComplete(): return currentPrompt.addResult(response)
+            else: return 'Cannot respond, prompt is complete.'
+        else: return 'You cannot respond to the prompt.'
+    else: return 'Cannot respond, no prompt is active.'
+
+def promptGive():
+    global currentPrompt
+    if currentPrompt != 0:
+        if not currentPrompt.isComplete(): return currentPrompt.givePrompt()
+        else:
+            toExec = currentPrompt.givePrompt()
+            response = str(exec(toExec))
+            currentPrompt = 0
+            return response + '\nPrompt reset.'
+    else: return 'No prompt is active.'
 
 def buildEva(name, owner):
     return Actor.Actor(name, owner, 'Production Eva', 3, 5, 3, 40, 68, 63, 24, 27, 27, 49, 2, 4,
@@ -166,9 +213,14 @@ def parseInput(request, player, originOfAction):
         return [fireWeapon(args[0],player,args[1],args[2]),combatOutput]
     elif cmd[0] == 'addcondition':
         args = cmd[1].split(';')
-        return[addCondition(args[0],player,args[1],args[2],int(args[3])),combatOutput]
+        return [addCondition(args[0],player,args[1],args[2],int(args[3])),combatOutput]
     elif cmd[0] == 'endinterval':
-        return[endInterval(),combatOutput]
+        return [endInterval(),combatOutput]
+    elif cmd[0] == 'buildEva':
+        return [buildArbitraryEva(player),originOfAction]
+    elif cmd[0] == 'p':
+        if cmd[1] == 'give': return [promptGive(), originOfAction]
+        else: return [promptRespond(player, cmd[1]), originOfAction]
     else:
         return ['Unrecognized command: ' + request + '. Type ?help for help.', originOfAction]
 
@@ -177,6 +229,7 @@ combatOutput = -1
 combatOwner = []
 GlobalCriticalMomentumTicker = 15
 actors = []
+currentPrompt = 0
 
 with open('config/conditions.json','r') as data_file:
     GloablConditionDefinitions = json.loads(data_file.read())
@@ -185,13 +238,13 @@ with open('config/weapons.json') as data_file:
 with open('config/hit_effects.json') as data_file:
     GlobalHitEffects = json.loads(data_file.read())
 
-errorSuppress = True #doesn't crash the module if something goes wrong.
+errorSuppress = False #doesn't crash the module if something goes wrong.
 #set to False to lose data and get tracebacks
 
 print(parseInput('start combat', 'TESTPLAYER', 'TESTORIGIN')[0])
 
 while combatMode:
     if errorSuppress:
-        try: print(parseInput(input('INPUT COMMAND: '),'Player','Origin')[0])
+        try: print(parseInput(input('INPUT COMMAND: '),'TESTPLAYER','TESTORIGIN')[0])
         except: print(sys.exc_info())
-    else: print(parseInput(input('INPUT COMMAND: '),'Player','Origin')[0])
+    else: print(parseInput(input('INPUT COMMAND: '),'TESTPLAYER','TESTORIGIN')[0])

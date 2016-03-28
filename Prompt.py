@@ -1,9 +1,10 @@
 import random
+import re
 
 class Prompt:
-    #Required: command, prompt, typing, manualFlag.
+    #Required: command, prompt, typing, manualFlag, owner.
     #warnValue, prompt, and typing should all have the same size.
-    def __init__(self, command, prompt, typing, warnValue, manualFlag):
+    def __init__(self, command, prompt, typing, warnValue, manualFlag, owner):
         self.command = command #the command that will be returned that should
             #be fed into an EXEC statement. 
         self.prompt = prompt #the human prompts as an array that will be returned as a reqest.
@@ -18,11 +19,12 @@ class Prompt:
         self.confirmAwait = False #is the prompt waiting for a confirmation?
         self.confirmMessage = '' #the confirmation the prompt is waiting for
         self.confirmValue = 0 #the value to be confirmed
+        self.owner = owner #the user who needs to respond to the prompt
 
     # Returns tompost prompt or the value to be fed to an ExecStatement if isComplete is True.
     def givePrompt(self):
         if not self.isComplete():
-            promptPosn = len(self.prompt)-1
+            promptPosn = len(self.results)
             if not self.confirmAwait:
                 if self.typing[promptPosn].startswith('d'):
                     if self.manualFlag:
@@ -36,29 +38,34 @@ class Prompt:
                 return 'You must first confirm. ' + self.confirmMessage
         else:
             retVal = self.command
-            a = 0
-            while a <= len(self.results):
-                retVal = retVal + self.Results[a]
-                a = a + 1
+            for a in range(len(self.results)):
+                if self.typing[a] == 's':
+                    retVal = re.sub('qqq',"'" + self.results[a] + "'",retVal, count=1)
+                else:
+                    retVal = re.sub('qqq',self.results[a],retVal, count=1)
             return retVal
             
     # Adds the result of the most recent prompt to the list if it is correct
     def addResult(self, result):
-        promptPosn = len(self.prompt)-1
+        promptPosn = len(self.results)
         correct = False
-        if self.confirmAwait and result == self.confirmValue:
-            correct = True
-            self.unsetConfirm()
+        if self.confirmAwait:
+            if result == self.confirmValue:
+                self.unsetConfirm()
+                correct = True
+            else:
+                self.unsetConfirm()
+                return 'Confirmation failed.'
         elif self.typing[promptPosn] == 's':
             if self.warnValue[promptPosn] == '': correct = True
             else: correct = False
         elif self.typing[promptPosn] == 'i':
             if self.isInt(result):
-                if result <= self.warnValue[promptPosn]: correct = True
+                if int(result) <= self.warnValue[promptPosn]: correct = True
                 else: correct = False
-            else: return 'This value is invalid.'
+            else: return 'This value is invalid. Expecting integer.'
         elif self.typing[promptPosn].startsWith('d'):
-            if self.isValidRoll(result, self.typing[promptPosn][1:]):
+            if self.isValidRoll(int(result), self.typing[promptPosn][1:]):
                 correct = True
             elif self.warnValue[promptPosn] != '': correct = True
             elif self.isInt(result): correct = False
@@ -71,7 +78,7 @@ class Prompt:
     # Sets the confirmation value and returns a string asking for confirmation
     def setConfirm(self, value):
         self.confirmAwait = True
-        self.confirmMessage = 'You entered ' + str(value) + '. Are you sure?'
+        self.confirmMessage = 'Enter ' + value + ' again to confirm.'
         self.confirmValue = value
         return self.confirmMessage
 
